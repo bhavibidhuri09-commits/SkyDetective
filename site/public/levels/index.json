@@ -33,10 +33,18 @@
       "title": { "en": "The third asteroid ever found", "hi": "अब तक खोजा गया तीसरा क्षुद्रग्रह" }
     },
     {
-      "id": "level7-empty",
+      "id": "level7-planetx",
       "kind": "real",
-      "folder": "level7-empty",
-      "title": { "en": "An empty patch of sky?", "hi": "आकाश का एक खाली हिस्सा?" }
+      "folder": "level7-planetx",
+      "title": { "en": "Where Planet Nine might hide", "hi": "जहाँ प्लैनेट नाइन छिपा हो सकता है" },
+      "note": {
+        "en": "This patch lies on the path where astronomers Mike Brown and Konstantin Batygin predict Planet Nine is most likely to be. SPHEREx saw nothing moving here. A real Planet Nine would be about 550 au away, too faint for SPHEREx (around magnitude 22), and would shift less than one pixel between these two scans. Finding it will take deeper telescopes such as the Rubin Observatory.",
+        "hi": "आकाश का यह हिस्सा उसी रास्ते पर है जहाँ खगोलशास्त्री माइक ब्राउन और कॉन्स्टैंटिन बैटीगिन के अनुसार प्लैनेट नाइन के होने की सबसे ज़्यादा संभावना है। SPHEREx को यहाँ कुछ भी चलता हुआ नहीं दिखा। असली प्लैनेट नाइन लगभग 550 au दूर होगा, SPHEREx के लिए बहुत धुंधला (लगभग मैग्निट्यूड 22), और इन दो स्कैन के बीच एक पिक्सेल से भी कम खिसकेगा। उसे ढूँढने के लिए रुबिन वेधशाला जैसे और गहराई तक देखने वाले टेलीस्कोप चाहिए।"
+      },
+      "noteLink": {
+        "url": "https://arxiv.org/abs/2108.09868",
+        "label": { "en": "The prediction (Brown & Batygin 2021)", "hi": "भविष्यवाणी (ब्राउन और बैटीगिन 2021)" }
+      }
     }
   ]
 }
