@@ -1,0 +1,6 @@
+numpy
+astropy>=6
+astroquery>=0.4.10
+reproject
+pillow
+requests

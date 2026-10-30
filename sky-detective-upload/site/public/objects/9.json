@@ -1,0 +1,17 @@
+{
+  "number": 9,
+  "name": "9 Metis",
+  "orbit_class": "Main-belt Asteroid",
+  "diameter_km": 190.0,
+  "albedo": 0.118,
+  "sun_distance_au": 2.39,
+  "perihelion_au": 2.09,
+  "aphelion_au": 2.68,
+  "period_years": 3.7,
+  "discovered": "1848-Apr-25",
+  "discovered_by": "Graham, A.",
+  "discovered_at": "Markree",
+  "sbdb_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=9",
+  "mpc_url": "https://minorplanetcenter.net/db_search/show_object?object_id=9",
+  "source": "JPL Small-Body Database API"
+}

@@ -1,0 +1,42 @@
+{
+  "rounds": [
+    {
+      "id": "training-1",
+      "kind": "training",
+      "folder": "training-bg",
+      "plant": { "seed": 11, "peak": 190, "sigma": 2.6, "jump": 70 },
+      "title": { "en": "Training: a bright planted mover", "hi": "ट्रेनिंग: एक चमकीली नकली वस्तु" }
+    },
+    {
+      "id": "training-2",
+      "kind": "training",
+      "folder": "training-bg",
+      "plant": { "seed": 27, "peak": 90, "sigma": 2.2, "jump": 45 },
+      "title": { "en": "Training: a fainter planted mover", "hi": "ट्रेनिंग: एक धुंधली नकली वस्तु" }
+    },
+    {
+      "id": "level2-hygiea",
+      "kind": "real",
+      "folder": "level2-hygiea",
+      "title": { "en": "A giant of the asteroid belt", "hi": "क्षुद्रग्रह पट्टी का एक दिग्गज" }
+    },
+    {
+      "id": "level3-metis",
+      "kind": "real",
+      "folder": "level3-metis",
+      "title": { "en": "One day in the asteroid belt", "hi": "क्षुद्रग्रह पट्टी में एक दिन" }
+    },
+    {
+      "id": "level4-juno",
+      "kind": "real",
+      "folder": "level4-juno",
+      "title": { "en": "The third asteroid ever found", "hi": "अब तक खोजा गया तीसरा क्षुद्रग्रह" }
+    },
+    {
+      "id": "level7-empty",
+      "kind": "real",
+      "folder": "level7-empty",
+      "title": { "en": "An empty patch of sky?", "hi": "आकाश का एक खाली हिस्सा?" }
+    }
+  ]
+}

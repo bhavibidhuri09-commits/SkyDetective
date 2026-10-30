@@ -1,0 +1,17 @@
+{
+  "number": 10,
+  "name": "10 Hygiea",
+  "orbit_class": "Main-belt Asteroid",
+  "diameter_km": 407.12,
+  "albedo": 0.0717,
+  "sun_distance_au": 3.15,
+  "perihelion_au": 2.81,
+  "aphelion_au": 3.49,
+  "period_years": 5.59,
+  "discovered": "1849-Apr-12",
+  "discovered_by": "De Gasparis, A.",
+  "discovered_at": "Naples",
+  "sbdb_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10",
+  "mpc_url": "https://minorplanetcenter.net/db_search/show_object?object_id=10",
+  "source": "JPL Small-Body Database API"
+}
