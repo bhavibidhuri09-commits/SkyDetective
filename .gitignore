@@ -1,3 +1,9 @@
-node_modules
-dist
-.DS_Store
+# downloads and scratch work from the data pipeline
+.work/
+/levels/
+scratch/
+__pycache__/
+
+# web build output
+node_modules/
+site/dist/
