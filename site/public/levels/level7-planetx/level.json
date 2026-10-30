@@ -1,0 +1,390 @@
+{
+  "id": "level7-planetx",
+  "center": {
+    "ra": 45.4,
+    "dec": 3.7
+  },
+  "size_deg": 0.5,
+  "image_px": 585,
+  "arcsec_per_px": 3.077,
+  "orientation": "north up, east left",
+  "coords": "x,y in PNG pixels from top-left; u,v as fractions",
+  "dt_hours": 11.461,
+  "collection": "spherex_qr2",
+  "frames": [
+    {
+      "png": "frame_a.png",
+      "obs_id": "2025W32_2D_0072_2",
+      "detector": "SPHEREx-D3",
+      "mjd": 60894.887787,
+      "utc": "2025-08-07T21:18:24Z",
+      "wavelength_um": 2.033,
+      "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W32_2D/l2b-v20-2025-265/3/level2_2025W32_2D_0072_2D3_spx_l2b-v20-2025-265.fits"
+    },
+    {
+      "png": "frame_b.png",
+      "obs_id": "2025W32_2D_0159_1",
+      "detector": "SPHEREx-D3",
+      "mjd": 60895.365308,
+      "utc": "2025-08-08T08:46:02Z",
+      "wavelength_um": 2.0808,
+      "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W32_2D/l2b-v20-2025-265/3/level2_2025W32_2D_0159_1D3_spx_l2b-v20-2025-265.fits"
+    }
+  ],
+  "flux_scale_b": 0.9525,
+  "diff_png": "diff.png",
+  "objects": [
+    {
+      "name": "1999 JX86",
+      "number": 33654,
+      "type": "MB>Middle",
+      "vmag": 19.42,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 269.35,
+          "y": 302.65,
+          "u": 0.4604,
+          "v": 0.5174,
+          "ra": 45.41983,
+          "dec": 3.691323,
+          "in_view": true,
+          "signal_sigma": 1.9,
+          "vanished": 1.04
+        },
+        {
+          "x": 139.2,
+          "y": 283.55,
+          "u": 0.2379,
+          "v": 0.4847,
+          "ra": 45.531301,
+          "dec": 3.707642,
+          "in_view": true,
+          "signal_sigma": 3.6,
+          "vanished": 0.6
+        }
+      ],
+      "motion_arcsec": 404.7,
+      "motion_px": 131.5,
+      "rate_arcsec_per_hour": 35.32,
+      "visible_guess": false
+    },
+    {
+      "name": "2013 RE52",
+      "number": 459790,
+      "type": "MB>Outer",
+      "vmag": 20.62,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 645.21,
+          "y": 241.94,
+          "u": 1.1029,
+          "v": 0.4136,
+          "ra": 45.097899,
+          "dec": 3.743166,
+          "in_view": false,
+          "signal_sigma": null,
+          "vanished": null
+        },
+        {
+          "x": 489.93,
+          "y": 303.38,
+          "u": 0.8375,
+          "v": 0.5186,
+          "ra": 45.230904,
+          "dec": 3.690688,
+          "in_view": true,
+          "signal_sigma": 2.6,
+          "vanished": 0.36
+        }
+      ],
+      "motion_arcsec": 513.8,
+      "motion_px": 167.0,
+      "rate_arcsec_per_hour": 44.83,
+      "visible_guess": false
+    },
+    {
+      "name": "2006 KG98",
+      "number": 199783,
+      "type": "MB>Outer",
+      "vmag": 21.3,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 21.05,
+          "y": 211.44,
+          "u": 0.036,
+          "v": 0.3614,
+          "ra": 45.632512,
+          "dec": 3.769252,
+          "in_view": true,
+          "signal_sigma": 2.2,
+          "vanished": 0.55
+        },
+        {
+          "x": -66.31,
+          "y": 213.93,
+          "u": -0.1134,
+          "v": 0.3657,
+          "ra": 45.707339,
+          "dec": 3.767096,
+          "in_view": false,
+          "signal_sigma": null,
+          "vanished": null
+        }
+      ],
+      "motion_arcsec": 268.9,
+      "motion_px": 87.4,
+      "rate_arcsec_per_hour": 23.46,
+      "visible_guess": false
+    },
+    {
+      "name": "2000 AR196",
+      "number": 205167,
+      "type": "MB>Middle",
+      "vmag": 21.4,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 370.91,
+          "y": 465.97,
+          "u": 0.634,
+          "v": 0.7965,
+          "ra": 45.332852,
+          "dec": 3.551729,
+          "in_view": true,
+          "signal_sigma": 1.7,
+          "vanished": 1.04
+        },
+        {
+          "x": 238.81,
+          "y": 484.13,
+          "u": 0.4082,
+          "v": 0.8276,
+          "ra": 45.445977,
+          "dec": 3.536211,
+          "in_view": true,
+          "signal_sigma": 6.7,
+          "vanished": 0.26
+        }
+      ],
+      "motion_arcsec": 410.3,
+      "motion_px": 133.3,
+      "rate_arcsec_per_hour": 35.8,
+      "visible_guess": false
+    },
+    {
+      "name": "2003 GR62",
+      "number": 721221,
+      "type": "MB>Middle",
+      "vmag": 21.7,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 124.53,
+          "y": 318.99,
+          "u": 0.2129,
+          "v": 0.5453,
+          "ra": 45.543861,
+          "dec": 3.677343,
+          "in_view": true,
+          "signal_sigma": 2.3,
+          "vanished": 1.37
+        },
+        {
+          "x": -11.74,
+          "y": 287.14,
+          "u": -0.0201,
+          "v": 0.4908,
+          "ra": 45.660574,
+          "dec": 3.704546,
+          "in_view": false,
+          "signal_sigma": null,
+          "vanished": null
+        }
+      ],
+      "motion_arcsec": 430.6,
+      "motion_px": 139.9,
+      "rate_arcsec_per_hour": 37.57,
+      "visible_guess": false
+    },
+    {
+      "name": "2011 TN14",
+      "number": null,
+      "type": "MB>Middle",
+      "vmag": 21.76,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 605.81,
+          "y": 264.86,
+          "u": 1.0356,
+          "v": 0.4527,
+          "ra": 45.131647,
+          "dec": 3.723585,
+          "in_view": false,
+          "signal_sigma": null,
+          "vanished": null
+        },
+        {
+          "x": 460.93,
+          "y": 281.62,
+          "u": 0.7879,
+          "v": 0.4814,
+          "ra": 45.255738,
+          "dec": 3.70929,
+          "in_view": true,
+          "signal_sigma": 2.1,
+          "vanished": 2.88
+        }
+      ],
+      "motion_arcsec": 448.8,
+      "motion_px": 145.8,
+      "rate_arcsec_per_hour": 39.16,
+      "visible_guess": false
+    },
+    {
+      "name": "2011 CN70",
+      "number": 331268,
+      "type": "MB>Outer",
+      "vmag": 21.79,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 189.5,
+          "y": 471.51,
+          "u": 0.3239,
+          "v": 0.806,
+          "ra": 45.488199,
+          "dec": 3.546997,
+          "in_view": true,
+          "signal_sigma": 2.6,
+          "vanished": 5.25
+        },
+        {
+          "x": 82.83,
+          "y": 477.51,
+          "u": 0.1416,
+          "v": 0.8163,
+          "ra": 45.579547,
+          "dec": 3.541854,
+          "in_view": true,
+          "signal_sigma": 2.5,
+          "vanished": 1.14
+        }
+      ],
+      "motion_arcsec": 328.7,
+      "motion_px": 106.8,
+      "rate_arcsec_per_hour": 28.69,
+      "visible_guess": false
+    },
+    {
+      "name": "2009 WQ252",
+      "number": 332819,
+      "type": "MB>Outer",
+      "vmag": 21.84,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 477.22,
+          "y": 87.52,
+          "u": 0.8158,
+          "v": 0.1496,
+          "ra": 45.241762,
+          "dec": 3.875181,
+          "in_view": true,
+          "signal_sigma": 2.1,
+          "vanished": 1.2
+        },
+        {
+          "x": 402.98,
+          "y": 74.21,
+          "u": 0.6889,
+          "v": 0.1269,
+          "ra": 45.305352,
+          "dec": 3.886568,
+          "in_view": true,
+          "signal_sigma": 2.1,
+          "vanished": 0.94
+        }
+      ],
+      "motion_arcsec": 232.0,
+      "motion_px": 75.4,
+      "rate_arcsec_per_hour": 20.25,
+      "visible_guess": false
+    },
+    {
+      "name": "2008 WX12",
+      "number": null,
+      "type": "MB>Middle",
+      "vmag": 21.85,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 286.45,
+          "y": 342.44,
+          "u": 0.4897,
+          "v": 0.5854,
+          "ra": 45.405181,
+          "dec": 3.657319,
+          "in_view": true,
+          "signal_sigma": 1.3,
+          "vanished": 0.39
+        },
+        {
+          "x": 107.55,
+          "y": 307.39,
+          "u": 0.1838,
+          "v": 0.5254,
+          "ra": 45.558408,
+          "dec": 3.687263,
+          "in_view": true,
+          "signal_sigma": 0.8,
+          "vanished": 1.52
+        }
+      ],
+      "motion_arcsec": 560.9,
+      "motion_px": 182.3,
+      "rate_arcsec_per_hour": 48.95,
+      "visible_guess": false
+    },
+    {
+      "name": "2010 JX41",
+      "number": 727647,
+      "type": "Trojan",
+      "vmag": 21.9,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 48.0,
+          "y": 130.67,
+          "u": 0.0821,
+          "v": 0.2234,
+          "ra": 45.609443,
+          "dec": 3.838287,
+          "in_view": true,
+          "signal_sigma": 6.1,
+          "vanished": -0.54
+        },
+        {
+          "x": -0.8,
+          "y": 158.68,
+          "u": -0.0014,
+          "v": 0.2713,
+          "ra": 45.651237,
+          "dec": 3.814338,
+          "in_view": false,
+          "signal_sigma": null,
+          "vanished": null
+        }
+      ],
+      "motion_arcsec": 173.1,
+      "motion_px": 56.3,
+      "rate_arcsec_per_hour": 15.11,
+      "visible_guess": false
+    }
+  ],
+  "movers": [],
+  "credit": "SPHEREx data: NASA/JPL-Caltech, via NASA/IPAC Infrared Science Archive (IRSA). Solar-system positions: IMCCE SkyBoT; JPL Horizons."
+}
