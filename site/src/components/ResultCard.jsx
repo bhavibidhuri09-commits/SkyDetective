@@ -71,6 +71,14 @@ export default function ResultCard({ result, data }) {
         </p>
       )}
       {body && <p>{body}</p>}
+      {data.round.note && (
+        <p>
+          {data.round.note[lang]}
+          {data.round.noteLink && (
+            <> <a href={data.round.noteLink.url} target="_blank" rel="noreferrer">{data.round.noteLink.label[lang]}</a></>
+          )}
+        </p>
+      )}
       {target && !simulated && <ObjectFacts target={target} level={data.level} />}
     </section>
   );
