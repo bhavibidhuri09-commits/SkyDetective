@@ -16,7 +16,7 @@ function ring(ctx, p, color, radius = 14) {
 // Shows one frame at a time (the blink) plus answer overlays, and reports
 // taps in image pixels so they can be compared with level.json positions.
 // When zoomed the canvas scrolls inside its box: touch scrolls natively, a mouse drags.
-export default function SkyCanvas({ frames, diff, showB, found, reveal, flash, onTap, stampText, cornerText, label, zoomInLabel, zoomOutLabel }) {
+export default function SkyCanvas({ frames, diff, showB, found, reveal, flash, overlay, onTap, stampText, cornerText, label, zoomInLabel, zoomOutLabel }) {
   const ref = useRef(null);
   const scroller = useRef(null);
   const center = useRef(null);
@@ -67,7 +67,8 @@ export default function SkyCanvas({ frames, diff, showB, found, reveal, flash, o
       else ring(ctx, t.frames[frameIndex], GREEN);
     }
     if (flash) ring(ctx, flash, RED);
-  }, [frames, diff, frameIndex, found, reveal, flash]);
+    if (overlay) overlay(ctx);
+  }, [frames, diff, frameIndex, found, reveal, flash, overlay]);
 
   const handlePointerDown = (e) => {
     if (e.pointerType !== "mouse" || zoom === 1) {
