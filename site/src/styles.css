@@ -78,6 +78,16 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 .scrub { flex: 1 1 100%; accent-color: var(--heat); }
 .overlays { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; font-size: 13px; color: var(--dim); }
 .overlays label { display: flex; gap: 6px; align-items: center; }
+.provenance { font-size: 12px; color: var(--dim); display: flex; flex-direction: column; gap: 6px; overflow-wrap: anywhere; }
+.provenance p { margin: 0; }
+.provenance a, .candidate a { color: var(--heat); }
+.provenance summary { cursor: pointer; }
+.provenance ul { margin: 6px 0; padding-left: 18px; display: flex; flex-direction: column; gap: 3px; }
+.candidate { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+.candidate h4 { margin: 0; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--heat); }
+.candidate label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--dim); }
+.candidate select, .candidate textarea { font-family: var(--body); font-size: 16px; width: 100%; color: var(--ink); background: var(--void); border: 1px solid var(--line); border-radius: 4px; padding: 9px 10px; }
+.result .candidate p { font-size: 12px; }
 .chart { width: 100%; height: auto; display: block; }
 .chart text { font-family: var(--mono); font-size: 10px; fill: var(--dim); }
 .chart-grid { stroke: var(--line); stroke-width: 1; }
