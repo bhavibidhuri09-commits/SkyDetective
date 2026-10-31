@@ -46,6 +46,10 @@
       "id": "level7-planetx",
       "kind": "real",
       "folder": "level7-planetx",
+      "diffNote": {
+        "en": "The ring and the rays here are leftovers from bright stars, not movers.",
+        "hi": "यहाँ दिखने वाला छल्ला और किरणें चमकीले तारों के अवशेष हैं, चलती वस्तुएँ नहीं।"
+      },
       "title": { "en": "Where Planet Nine might hide", "hi": "जहाँ प्लैनेट नाइन छिपा हो सकता है" },
       "note": {
         "en": "This patch lies on the path where astronomers Mike Brown and Konstantin Batygin predict Planet Nine is most likely to be. SPHEREx saw nothing moving here. A real Planet Nine would be about 550 au away, too faint for SPHEREx (around magnitude 22), and would shift less than one pixel between these two scans. Finding it will take deeper telescopes such as the Rubin Observatory.",
