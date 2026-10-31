@@ -36,6 +36,11 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 
 .home { display: flex; flex-direction: column; gap: 18px; }
 .intro { font-size: 16px; color: var(--dim); margin: 0; max-width: 60ch; }
+.story { font-size: 14px; color: var(--dim); margin: 0; max-width: 60ch; padding-left: 12px; border-left: 2px solid var(--heat); }
+.guide summary { font-family: var(--display); font-weight: 600; font-size: 16px; cursor: pointer; }
+.guide dl { margin: 10px 0 0; font-size: 14px; }
+.guide dt { color: var(--heat); font-weight: 600; margin-top: 10px; }
+.guide dd { margin: 2px 0 0; color: var(--dim); }
 .how { margin: 0; padding: 0; list-style: none; counter-reset: how; display: grid; gap: 10px; }
 .how li { counter-increment: how; display: grid; grid-template-columns: 28px 1fr; align-items: baseline; }
 .how li::before { content: counter(how); font-family: var(--mono); color: var(--heat); }
@@ -62,7 +67,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 .round-title { font-family: var(--display); font-weight: 600; font-size: 20px; margin: 0; }
 
 .frame { position: relative; width: 100%; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #000; touch-action: manipulation; }
-.frame canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+.frame-scroll { width: 100%; height: 100%; overflow: auto; scrollbar-width: none; }
+.frame-scroll::-webkit-scrollbar { display: none; }
+.frame canvas { display: block; cursor: crosshair; }
+.zoom { position: absolute; left: 10px; bottom: 10px; display: flex; align-items: center; font-family: var(--mono); font-size: 11px; color: var(--ink); background: rgba(7, 8, 13, 0.75); border-radius: 3px; }
+.zoom span { min-width: 22px; text-align: center; }
+.zoom button { width: 36px; height: 36px; background: none; border: 0; color: var(--ink); font-size: 18px; cursor: pointer; }
+.zoom button:disabled { opacity: 0.35; cursor: default; }
 .stamp { position: absolute; left: 10px; top: 10px; font-family: var(--mono); font-size: 11px; background: rgba(7, 8, 13, 0.75); padding: 4px 8px; border-radius: 3px; letter-spacing: 0.04em; pointer-events: none; }
 .stamp.a { color: var(--heat); }
 .stamp.b { color: var(--ir); }
