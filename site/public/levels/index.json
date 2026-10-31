@@ -33,6 +33,16 @@
       "title": { "en": "The third asteroid ever found", "hi": "अब तक खोजा गया तीसरा क्षुद्रग्रह" }
     },
     {
+      "id": "level6-makemake",
+      "kind": "real",
+      "folder": "level6-makemake",
+      "title": { "en": "A dwarf planet beyond Neptune", "hi": "नेपच्यून के पार एक बौना ग्रह" },
+      "note": {
+        "en": "Makemake is a dwarf planet about 45 au from the Sun, roughly 1,430 km across. These scans are four days apart, yet it moved less than a main-belt asteroid does in a few hours. The farther away a world is, the slower it seems to crawl, which is why a hidden planet would be so hard to catch.",
+        "hi": "मेकमेक एक बौना ग्रह है, जो सूर्य से लगभग 45 au दूर है और लगभग 1,430 किमी चौड़ा है। ये दोनों स्कैन चार दिन के अंतर पर लिए गए, फिर भी यह उससे कम खिसका जितना मुख्य पट्टी का कोई क्षुद्रग्रह कुछ ही घंटों में खिसक जाता है। कोई पिंड जितना दूर होता है, उतना ही धीरे रेंगता दिखता है, इसीलिए किसी छिपे ग्रह को पकड़ना इतना मुश्किल है।"
+      }
+    },
+    {
       "id": "level7-planetx",
       "kind": "real",
       "folder": "level7-planetx",
