@@ -1,4 +1,4 @@
-import { plantMover } from "./plantMover.js";
+import { plantMover, randomPlant } from "./plantMover.js";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -22,6 +22,28 @@ async function loadPixels(url) {
 
 export async function loadRoundList() {
   return (await fetchJson(`${BASE}levels/index.json`)).rounds;
+}
+
+const CHALLENGE_ROUNDS = 8;
+const CHALLENGE_REAL = 5;
+
+function shuffled(list) {
+  const out = [...list];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+// Challenge: 8 rounds in a shuffled order, up to 5 real and the rest simulated.
+export function buildChallengeRounds(rounds) {
+  const real = shuffled(rounds.filter((r) => r.kind === "real")).slice(0, CHALLENGE_REAL);
+  const simulated = Array.from({ length: CHALLENGE_ROUNDS - real.length }, (_, i) => ({
+    id: `challenge-sim-${i + 1}`, kind: "training", folder: "training-bg", plant: randomPlant(),
+    title: { en: "A simulated mover", hi: "एक नकली चलती वस्तु" },
+  }));
+  return shuffled([...real, ...simulated]);
 }
 
 // Everything one round needs: both frames as pixels, the level metadata,
