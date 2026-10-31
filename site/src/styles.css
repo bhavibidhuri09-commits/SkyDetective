@@ -122,6 +122,17 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 .links { display: flex; gap: 16px; }
 .links a { color: var(--heat); }
 
+.evidence { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.evidence h4 { margin: 0; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--heat); }
+.result .evidence-verdict { color: var(--ink); }
+.evidence dl { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: 13px; }
+.evidence dl > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 10px; }
+.evidence dt { color: var(--dim); }
+.evidence dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.evidence a { color: var(--heat); }
+.result .evidence-limit { font-size: 12px; }
+@media (max-width: 380px) { .evidence dl > div { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
 .end { display: flex; flex-direction: column; gap: 12px; }
 .end h2 { font-family: var(--display); font-weight: 800; font-size: 28px; margin: 0; }
 .end .big { font-family: var(--mono); font-size: 48px; color: var(--heat); line-height: 1; }
