@@ -24,6 +24,15 @@ export async function loadRoundList() {
   return (await fetchJson(`${BASE}levels/index.json`)).rounds;
 }
 
+// The how-to animation: the training image without and with a planted mover.
+export async function loadHowToFrames(plant) {
+  const dir = `${BASE}levels/training-bg/`;
+  const clean = await Promise.all([loadPixels(`${dir}frame_a.png`), loadPixels(`${dir}frame_b.png`)]);
+  const planted = clean.map((img) => new ImageData(new Uint8ClampedArray(img.data), img.width, img.height));
+  const spot = plantMover(planted[0], planted[1], plant);
+  return { clean, planted, spots: [spot.a, spot.b] };
+}
+
 const CHALLENGE_ROUNDS = 8;
 const CHALLENGE_REAL = 5;
 
