@@ -1,4 +1,5 @@
 import { useI18n } from "../i18n/I18n.jsx";
+import Evidence from "./Evidence.jsx";
 
 export function formatDate(utc, lang) {
   return new Date(utc).toLocaleDateString(lang === "hi" ? "hi-IN" : "en-GB", {
@@ -6,34 +7,27 @@ export function formatDate(utc, lang) {
   });
 }
 
-function ObjectFacts({ target, level }) {
+function ObjectFacts({ target }) {
   const { t, orbitClass } = useI18n();
   const info = target.info;
+  if (!info) return null;
   return (
     <>
       <dl>
-        {info && (
-          <>
-            <dt>{t("type")}</dt>
-            <dd>{orbitClass(info.orbit_class)}</dd>
-            {info.diameter_km && (<><dt>{t("size")}</dt><dd>{t("km", { n: Math.round(info.diameter_km) })}</dd></>)}
-            <dt>{t("sunDist")}</dt>
-            <dd>{t("au", { n: info.sun_distance_au.toFixed(2) })}</dd>
-            {info.period_years && (<><dt>{t("orbit")}</dt><dd>{t("years", { n: info.period_years.toFixed(1) })}</dd></>)}
-            {info.discovered && (
-              <><dt>{t("discovered")}</dt><dd>{t("discoveredBy", { date: info.discovered, who: info.discovered_by })}</dd></>
-            )}
-          </>
+        <dt>{t("type")}</dt>
+        <dd>{orbitClass(info.orbit_class)}</dd>
+        {info.diameter_km && (<><dt>{t("size")}</dt><dd>{t("km", { n: Math.round(info.diameter_km) })}</dd></>)}
+        <dt>{t("sunDist")}</dt>
+        <dd>{t("au", { n: info.sun_distance_au.toFixed(2) })}</dd>
+        {info.period_years && (<><dt>{t("orbit")}</dt><dd>{t("years", { n: info.period_years.toFixed(1) })}</dd></>)}
+        {info.discovered && (
+          <><dt>{t("discovered")}</dt><dd>{t("discoveredBy", { date: info.discovered, who: info.discovered_by })}</dd></>
         )}
-        <dt>{t("moved")}</dt>
-        <dd>{t("movedValue", { px: Math.round(target.motionPx), arcsec: Math.round(target.motionArcsec), hours: level.dt_hours.toFixed(1) })}</dd>
       </dl>
-      {info && (
-        <p className="links">
-          <a href={info.sbdb_url} target="_blank" rel="noreferrer">{t("jplLink")}</a>
-          <a href={info.mpc_url} target="_blank" rel="noreferrer">{t("mpcLink")}</a>
-        </p>
-      )}
+      <p className="links">
+        <a href={info.sbdb_url} target="_blank" rel="noreferrer">{t("jplLink")}</a>
+        <a href={info.mpc_url} target="_blank" rel="noreferrer">{t("mpcLink")}</a>
+      </p>
     </>
   );
 }
@@ -79,7 +73,8 @@ export default function ResultCard({ result, data }) {
           )}
         </p>
       )}
-      {target && !simulated && <ObjectFacts target={target} level={data.level} />}
+      <Evidence level={data.level} simulated={simulated} target={target} />
+      {target && !simulated && <ObjectFacts target={target} />}
     </section>
   );
 }
