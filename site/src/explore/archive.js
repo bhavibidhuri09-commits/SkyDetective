@@ -19,7 +19,15 @@ async function request(params) {
 }
 
 export async function searchExposures(ra, dec) {
-  return (await request({ op: "search", ra, dec })).json();
+  let collections = null;
+  try {
+    ({ collections } = await (await request({ op: "releases" })).json());
+  } catch {
+    // The route falls back to its own list.
+  }
+  const params = { op: "search", ra, dec };
+  if (collections) params.collections = collections.join(",");
+  return (await request(params)).json();
 }
 
 export async function loadFrame(exposure, grid, sizeDeg) {
