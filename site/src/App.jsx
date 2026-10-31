@@ -23,9 +23,14 @@ export default function App() {
   const [finalStats, setFinalStats] = useState(null);
   const [gameKey, setGameKey] = useState(0);
 
-  useEffect(() => {
-    loadRoundList().then(setRounds).catch(() => setRounds([]));
-  }, []);
+  const [roundsFailed, setRoundsFailed] = useState(false);
+
+  const fetchRounds = () => {
+    setRoundsFailed(false);
+    loadRoundList().then(setRounds).catch(() => setRoundsFailed(true));
+  };
+
+  useEffect(fetchRounds, []);
 
   const start = (mode) => {
     setGameKey((k) => k + 1);
@@ -52,6 +57,8 @@ export default function App() {
       {screen === "home" && (
         <Home
           ready={Boolean(rounds?.length)}
+          failed={roundsFailed}
+          onRetry={fetchRounds}
           onStart={() => start("case")}
           onChallenge={() => start("challenge")}
           onPractice={() => start("practice")}
