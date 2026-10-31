@@ -40,6 +40,23 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 .how li { counter-increment: how; display: grid; grid-template-columns: 28px 1fr; align-items: baseline; }
 .how li::before { content: counter(how); font-family: var(--mono); color: var(--heat); }
 
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.howto { display: grid; grid-template-columns: minmax(0, 160px) 1fr; gap: 14px; align-items: center; }
+.howto-frame { aspect-ratio: 1; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #000; }
+.howto-frame canvas { display: block; width: 100%; height: 100%; }
+.howto-text { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-height: 170px; justify-content: center; }
+.howto-row { display: flex; gap: 10px; align-items: center; }
+@media (max-width: 340px) {
+  .howto { grid-template-columns: minmax(0, 110px) 1fr; }
+  .howto-text { min-height: 200px; }
+}
+.howto-text .badge { border-radius: 10px; }
+.howto-caption { margin: 0; font-size: 14px; }
+.howto-caption span { font-family: var(--mono); color: var(--heat); margin-right: 4px; }
+.howto-points { margin: 0; font-family: var(--mono); font-size: 18px; color: var(--heat); }
+.howto-press { margin: 0; font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+.howto-press.on { border-color: var(--ok); color: var(--ok); }
+
 .status { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
 .status strong { color: var(--ink); font-weight: 500; }
 .round-title { font-family: var(--display); font-weight: 600; font-size: 20px; margin: 0; }
