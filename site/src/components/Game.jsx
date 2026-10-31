@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../i18n/I18n.jsx";
-import { loadRound } from "../game/levels.js";
+import { loadDiff, loadRound } from "../game/levels.js";
 import { randomPlant } from "../game/plantMover.js";
 import {
   FIND_POINTS, MISS_POINTS, NOTHING_MOVED_POINTS, correctPoints, emptyStats, targetAt,
@@ -8,7 +8,11 @@ import {
 import SkyCanvas from "./SkyCanvas.jsx";
 import ResultCard, { formatDate } from "./ResultCard.jsx";
 
-const BLINK_MS = 650;
+const BLINK_SPEEDS = [
+  { name: "speedSlow", ms: 1000 },
+  { name: "speedNormal", ms: 650 },
+  { name: "speedFast", ms: 400 },
+];
 let practiceCount = 0;
 
 function practiceRound() {
@@ -31,13 +35,22 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
   const [flash, setFlash] = useState(null);
   const [showB, setShowB] = useState(false);
   const [playing, setPlaying] = useState(true);
+  const [speed, setSpeed] = useState(1);
+  const [diff, setDiff] = useState(null);
+  const [showDiff, setShowDiff] = useState(false);
+  const [diffFailed, setDiffFailed] = useState(false);
   const [stats, setStats] = useState(emptyStats);
   const startedAt = useRef(Date.now());
+  const currentRound = useRef(round);
 
   useEffect(() => {
     let live = true;
+    currentRound.current = round;
     setData(null);
     setLoadError(false);
+    setDiff(null);
+    setShowDiff(false);
+    setDiffFailed(false);
     loadRound(round)
       .then((d) => {
         if (!live) return;
@@ -55,10 +68,10 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
   }, [round]);
 
   useEffect(() => {
-    if (!playing || !data) return undefined;
-    const timer = setInterval(() => setShowB((b) => !b), BLINK_MS);
+    if (!playing || !data || showDiff) return undefined;
+    const timer = setInterval(() => setShowB((b) => !b), BLINK_SPEEDS[speed].ms);
     return () => clearInterval(timer);
-  }, [playing, data]);
+  }, [playing, data, speed, showDiff]);
 
   if (loadError) return <p className="hint">{t("loadError")}</p>;
   if (!data) return <p className="hint">{t("loading")}</p>;
@@ -109,6 +122,25 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
     finishRound();
   }
 
+  function toggleDiff() {
+    if (showDiff) {
+      setShowDiff(false);
+      return;
+    }
+    if (diff) {
+      setShowDiff(true);
+      return;
+    }
+    const forRound = data.round;
+    loadDiff(forRound)
+      .then((img) => {
+        if (forRound !== currentRound.current) return;
+        setDiff(img);
+        setShowDiff(true);
+      })
+      .catch(() => setDiffFailed(true));
+  }
+
   function nextRound() {
     if (practice) {
       setRound(practiceRound());
@@ -146,22 +178,36 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
       </span>
 
       <SkyCanvas
+        key={round.id}
         frames={data.frames}
+        diff={showDiff ? diff : null}
+        zoomInLabel={t("zoomIn")}
+        zoomOutLabel={t("zoomOut")}
         showB={showB}
         found={done ? [] : found}
         reveal={reveal}
         flash={flash}
         onTap={handleTap}
         label={round.title[lang]}
-        stampText={`${showB ? t("scanB") : t("scanA")} · ${when}`}
+        stampText={showDiff ? t("diffStamp") : `${showB ? t("scanB") : t("scanA")} · ${when}`}
         cornerText={`λ ${frame.wavelength_um} µm · ${frame.detector.replace("SPHEREx-", "")}`}
       />
-      <p className="hint">{t(hint, { n: remaining })}</p>
+      <p className="hint">
+        {showDiff ? <>{t("diffTxt")}{data.round.diffNote && <> {data.round.diffNote[lang]}</>}</> : t(hint, { n: remaining })}
+      </p>
 
       <div className="controls">
-        <button className="btn" type="button" onClick={() => setPlaying(!playing)}>
+        <button className="btn" type="button" onClick={() => setPlaying(!playing)} disabled={showDiff}>
           {playing ? t("pause") : t("play")}
         </button>
+        <button className="btn" type="button" onClick={() => setSpeed((speed + 1) % BLINK_SPEEDS.length)} disabled={showDiff}>
+          {t("speed", { name: t(BLINK_SPEEDS[speed].name) })}
+        </button>
+        {done && data.round.kind === "real" && !diffFailed && (
+          <button className="btn" type="button" onClick={toggleDiff}>
+            {showDiff ? t("diffHide") : t("diffShow")}
+          </button>
+        )}
         <button className="btn" type="button" onClick={handleNothingMoved} disabled={done}>
           {t("nothingMoved")}
         </button>
