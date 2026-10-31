@@ -1,15 +1,12 @@
 import { useI18n } from "../i18n/I18n.jsx";
+import HowTo from "./HowTo.jsx";
 
 export default function Home({ onStart, onChallenge, onPractice, ready }) {
   const { t } = useI18n();
   return (
     <section className="home">
       <p className="intro">{t("intro")}</p>
-      <ol className="how">
-        <li>{t("how1")}</li>
-        <li>{t("how2")}</li>
-        <li>{t("how3")}</li>
-      </ol>
+      <HowTo />
       <div className="controls">
         <button className="btn primary" type="button" onClick={onStart} disabled={!ready}>{t("start")}</button>
         <button className="btn" type="button" onClick={onChallenge} disabled={!ready}>{t("challenge")}</button>
