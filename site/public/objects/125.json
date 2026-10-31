@@ -1,0 +1,17 @@
+{
+  "number": 125,
+  "name": "125 Liberatrix",
+  "orbit_class": "Main-belt Asteroid",
+  "diameter_km": 48.418,
+  "albedo": 0.182,
+  "sun_distance_au": 2.74,
+  "perihelion_au": 2.52,
+  "aphelion_au": 2.97,
+  "period_years": 4.54,
+  "discovered": "1872-Sep-11",
+  "discovered_by": "Henry, Prosper",
+  "discovered_at": "Paris",
+  "sbdb_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=125",
+  "mpc_url": "https://minorplanetcenter.net/db_search/show_object?object_id=125",
+  "source": "JPL Small-Body Database API"
+}
