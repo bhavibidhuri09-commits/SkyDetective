@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useI18n } from "./i18n/I18n.jsx";
-import { loadRoundList } from "./game/levels.js";
+import { buildChallengeRounds, loadRoundList } from "./game/levels.js";
 import Home from "./components/Home.jsx";
 import Game from "./components/Game.jsx";
 import EndCard from "./components/EndCard.jsx";
@@ -8,7 +8,9 @@ import EndCard from "./components/EndCard.jsx";
 export default function App() {
   const { t, toggle } = useI18n();
   const [rounds, setRounds] = useState(null);
-  const [screen, setScreen] = useState("home"); // home | case | practice | end
+  const [screen, setScreen] = useState("home"); // home | case | challenge | practice | end
+  const [playMode, setPlayMode] = useState("case");
+  const [playRounds, setPlayRounds] = useState(null);
   const [finalStats, setFinalStats] = useState(null);
   const [gameKey, setGameKey] = useState(0);
 
@@ -18,6 +20,8 @@ export default function App() {
 
   const start = (mode) => {
     setGameKey((k) => k + 1);
+    setPlayMode(mode);
+    setPlayRounds(mode === "challenge" ? buildChallengeRounds(rounds) : rounds);
     setScreen(mode);
   };
 
@@ -32,19 +36,24 @@ export default function App() {
       </header>
 
       {screen === "home" && (
-        <Home ready={Boolean(rounds?.length)} onStart={() => start("case")} onPractice={() => start("practice")} />
+        <Home
+          ready={Boolean(rounds?.length)}
+          onStart={() => start("case")}
+          onChallenge={() => start("challenge")}
+          onPractice={() => start("practice")}
+        />
       )}
-      {(screen === "case" || screen === "practice") && (
+      {(screen === "case" || screen === "challenge" || screen === "practice") && (
         <Game
           key={gameKey}
           mode={screen}
-          rounds={rounds}
+          rounds={playRounds}
           onHome={() => setScreen("home")}
           onEnd={(stats) => { setFinalStats(stats); setScreen("end"); }}
         />
       )}
       {screen === "end" && (
-        <EndCard stats={finalStats} onAgain={() => start("case")} onHome={() => setScreen("home")} />
+        <EndCard stats={finalStats} mode={playMode} onAgain={() => start(playMode)} onHome={() => setScreen("home")} />
       )}
 
       <footer className="credit">{t("credit")}</footer>
