@@ -1,11 +1,15 @@
 // Passes SPHEREx data from NASA/IPAC IRSA to the browser, which IRSA doesn't allow directly.
-//   ?op=search&ra&dec                 exposures that contain a position, from every Quick Release
+//   ?op=releases                      the Quick Releases IRSA has now
+//   ?op=search&ra&dec&collections     exposures that contain a position, from those releases
 //   ?op=cutout&url&ra&dec&size        one FITS cutout, without the large PSF table
 //   ?op=catalog&cat&ra&dec&radius     Gaia or WISE sources in a circle
 const IRSA = "https://irsa.ipac.caltech.edu";
 const DATA_PREFIX = `${IRSA}/ibe/data/spherex/`;
-// New Quick Releases show up by themselves: a collection that doesn't exist yet returns no rows.
-const COLLECTIONS = ["spherex_qr2", "spherex_qr3", "spherex_qr4", "spherex_qr5", "spherex_qr6"];
+// Used only if IRSA's list of releases can't be read. A collection that doesn't exist yet returns no rows.
+const FALLBACK_COLLECTIONS = ["spherex_qr2", "spherex_qr3", "spherex_qr4", "spherex_qr5", "spherex_qr6"];
+const RELEASE_NAME = /^spherex_qr\d+$/; // leaves out the _cal and _deep collections
+const MAX_RELEASES = 30;
+const DAY = 86400;
 const CATALOGS = {
   gaia: { table: "gaia_dr3_source", mag: "phot_g_mean_mag", faintest: 15 },
   wise: { table: "allwise_p3as_psd", mag: "w1mpro", faintest: 13 },
@@ -62,8 +66,28 @@ function parseExposures(xml, collection) {
     }));
 }
 
-async function search(ra, dec) {
-  const results = await Promise.allSettled(COLLECTIONS.map(async (collection) => {
+// IRSA takes about 18 s to answer this, so it has its own long-lived cached response.
+async function releases() {
+  const adql = "SELECT DISTINCT collection FROM caom.observation WHERE collection LIKE 'spherex_qr%'";
+  const url = `${IRSA}/TAP/sync?QUERY=${encodeURIComponent(adql)}&FORMAT=CSV`;
+  const buffer = await fetchWithRetry(url, (b) => b.toString("latin1", 0, 10) === "collection");
+  const collections = buffer.toString("utf8").trim().split("\n").slice(1)
+    .map((name) => name.trim().replace(/"/g, "")).filter((name) => RELEASE_NAME.test(name));
+  if (!collections.length) throw new Error("IRSA listed no releases");
+  return new Response(JSON.stringify({ collections }), {
+    headers: {
+      "content-type": "application/json",
+      "cache-control": `public, s-maxage=${DAY}, stale-while-revalidate=${DAY * 7}`,
+    },
+  });
+}
+
+async function search(ra, dec, requested) {
+  const named = requested ? requested.split(",") : FALLBACK_COLLECTIONS;
+  if (named.length > MAX_RELEASES || !named.every((name) => RELEASE_NAME.test(name))) {
+    return json({ error: "bad collections" }, 400);
+  }
+  const results = await Promise.allSettled(named.map(async (collection) => {
     const pos = encodeURIComponent(`circle ${ra} ${dec} 0.01`);
     const url = `${IRSA}/SIA?COLLECTION=${collection}&POS=${pos}&RESPONSEFORMAT=VOTABLE`;
     const buffer = await fetchWithRetry(url, (b) => b.includes("<VOTABLE"));
@@ -78,9 +102,9 @@ async function search(ra, dec) {
       exposures.push(row);
     }
   });
-  const failed = COLLECTIONS.filter((_, i) => results[i].status === "rejected");
-  if (failed.length === COLLECTIONS.length) throw new Error("IRSA search failed");
-  return json({ exposures, failed }, 200, failed.length ? 0 : 86400);
+  const failed = named.filter((_, i) => results[i].status === "rejected");
+  if (failed.length === named.length) throw new Error("IRSA search failed");
+  return json({ exposures, failed }, 200, failed.length ? 0 : DAY);
 }
 
 function dropPsf(fitsFile) {
@@ -137,13 +161,20 @@ async function catalog(name, ra, dec, radius) {
 
 export async function GET(request) {
   const q = new URL(request.url).searchParams;
+  if (q.get("op") === "releases") {
+    try {
+      return await releases();
+    } catch (e) {
+      return json({ error: String(e.message || e) }, 502);
+    }
+  }
   const ra = Number(q.get("ra"));
   const dec = Number(q.get("dec"));
   if (!q.get("ra") || !q.get("dec") || !(ra >= 0 && ra < 360 && dec >= -90 && dec <= 90)) {
     return json({ error: "bad coordinates" }, 400);
   }
   try {
-    if (q.get("op") === "search") return await search(ra, dec);
+    if (q.get("op") === "search") return await search(ra, dec, q.get("collections"));
     if (q.get("op") === "cutout") return await cutout(q.get("url"), ra, dec, Number(q.get("size")));
     if (q.get("op") === "catalog") return await catalog(q.get("cat"), ra, dec, Number(q.get("radius")));
     return json({ error: "unknown op" }, 400);
