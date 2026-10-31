@@ -1,6 +1,6 @@
 import { useI18n } from "../i18n/I18n.jsx";
 
-export default function Home({ onStart, onPractice, ready }) {
+export default function Home({ onStart, onChallenge, onPractice, ready }) {
   const { t } = useI18n();
   return (
     <section className="home">
@@ -12,8 +12,10 @@ export default function Home({ onStart, onPractice, ready }) {
       </ol>
       <div className="controls">
         <button className="btn primary" type="button" onClick={onStart} disabled={!ready}>{t("start")}</button>
+        <button className="btn" type="button" onClick={onChallenge} disabled={!ready}>{t("challenge")}</button>
         <button className="btn" type="button" onClick={onPractice}>{t("practice")}</button>
       </div>
+      <p className="hint">{t("challengeNote")}</p>
     </section>
   );
 }

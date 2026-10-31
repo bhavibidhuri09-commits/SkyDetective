@@ -68,7 +68,9 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
   function finishRound() {
     setDone(true);
     if (data.round.kind === "real") {
-      setStats((s) => ({ ...s, skyDeg2: s.skyDeg2 + data.level.size_deg ** 2 }));
+      setStats((s) => ({ ...s, realRounds: s.realRounds + 1, skyDeg2: s.skyDeg2 + data.level.size_deg ** 2 }));
+    } else {
+      setStats((s) => ({ ...s, simRounds: s.simRounds + 1 }));
     }
   }
 
