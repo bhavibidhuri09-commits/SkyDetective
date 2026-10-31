@@ -18,6 +18,7 @@ Example
 import argparse
 import json
 import shutil
+import time
 from pathlib import Path
 
 from astropy import units as u
@@ -33,18 +34,30 @@ from find_object_pair import fetch_args, find_pairs
 ROUND_PREFIX = "auto-"
 
 
+def with_retries(call, attempts=6, wait_seconds=30):
+    """IRSA sometimes drops connections, so give it a few more chances."""
+    for attempt in range(1, attempts + 1):
+        try:
+            return call()
+        except Exception as e:
+            if attempt == attempts:
+                raise
+            print(f"  IRSA failed ({type(e).__name__}), retry {attempt}/{attempts - 1}")
+            time.sleep(wait_seconds)
+
+
 def newest_exposures(days):
     """The newest collection, its last exposure time, and that week's D2 pointings."""
-    collection = find_collections("auto")[0]
-    last = Irsa.query_tap(
+    collection = with_retries(lambda: find_collections("auto"))[0]
+    last = with_retries(lambda: Irsa.query_tap(
         f"SELECT TOP 1 t_min FROM ivoa.obscore WHERE obs_collection = '{collection}' ORDER BY t_min DESC"
-    ).to_table()
+    ).to_table())
     newest = float(last["t_min"][0])
-    rows = Irsa.query_tap(
+    rows = with_retries(lambda: Irsa.query_tap(
         f"SELECT TOP 2000 obs_id, s_ra, s_dec, t_min FROM ivoa.obscore "
         f"WHERE obs_collection = '{collection}' AND t_min > {newest - days} "
         f"AND energy_bandpassname = 'SPHEREx-D2'"  # dataproduct_subtype is blank in TAP
-    ).to_table()
+    ).to_table())
     return collection, newest, rows
 
 
