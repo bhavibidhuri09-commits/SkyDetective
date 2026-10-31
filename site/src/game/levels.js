@@ -33,6 +33,11 @@ export async function loadHowToFrames(plant) {
   return { clean, planted, spots: [spot.a, spot.b] };
 }
 
+// The difference image is only needed after a real round, so it loads on request.
+export function loadDiff(round) {
+  return loadPixels(`${BASE}levels/${round.folder}/diff.png`);
+}
+
 const CHALLENGE_ROUNDS = 8;
 const CHALLENGE_REAL = 5;
 
