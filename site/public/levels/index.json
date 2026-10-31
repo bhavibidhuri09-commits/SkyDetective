@@ -4,42 +4,79 @@
       "id": "training-1",
       "kind": "training",
       "folder": "training-bg",
-      "plant": { "seed": 11, "peak": 190, "sigma": 2.6, "jump": 70 },
-      "title": { "en": "Training: a bright planted mover", "hi": "ट्रेनिंग: एक चमकीली नकली वस्तु" }
+      "plant": {
+        "seed": 11,
+        "peak": 190,
+        "sigma": 2.6,
+        "jump": 70
+      },
+      "title": {
+        "en": "Training: a bright planted mover",
+        "hi": "ट्रेनिंग: एक चमकीली नकली वस्तु"
+      }
     },
     {
       "id": "training-2",
       "kind": "training",
       "folder": "training-bg",
-      "plant": { "seed": 27, "peak": 90, "sigma": 2.2, "jump": 45 },
-      "title": { "en": "Training: a fainter planted mover", "hi": "ट्रेनिंग: एक धुंधली नकली वस्तु" }
+      "plant": {
+        "seed": 27,
+        "peak": 90,
+        "sigma": 2.2,
+        "jump": 45
+      },
+      "title": {
+        "en": "Training: a fainter planted mover",
+        "hi": "ट्रेनिंग: एक धुंधली नकली वस्तु"
+      }
     },
     {
       "id": "level2-hygiea",
       "kind": "real",
       "folder": "level2-hygiea",
-      "title": { "en": "A giant of the asteroid belt", "hi": "क्षुद्रग्रह पट्टी का एक दिग्गज" }
+      "title": {
+        "en": "A giant of the asteroid belt",
+        "hi": "क्षुद्रग्रह पट्टी का एक दिग्गज"
+      }
     },
     {
       "id": "level3-metis",
       "kind": "real",
       "folder": "level3-metis",
-      "title": { "en": "One day in the asteroid belt", "hi": "क्षुद्रग्रह पट्टी में एक दिन" }
+      "title": {
+        "en": "One day in the asteroid belt",
+        "hi": "क्षुद्रग्रह पट्टी में एक दिन"
+      }
     },
     {
       "id": "level4-juno",
       "kind": "real",
       "folder": "level4-juno",
-      "title": { "en": "The third asteroid ever found", "hi": "अब तक खोजा गया तीसरा क्षुद्रग्रह" }
+      "title": {
+        "en": "The third asteroid ever found",
+        "hi": "अब तक खोजा गया तीसरा क्षुद्रग्रह"
+      }
     },
     {
       "id": "level6-makemake",
       "kind": "real",
       "folder": "level6-makemake",
-      "title": { "en": "A dwarf planet beyond Neptune", "hi": "नेपच्यून के पार एक बौना ग्रह" },
+      "title": {
+        "en": "A dwarf planet beyond Neptune",
+        "hi": "नेपच्यून के पार एक बौना ग्रह"
+      },
       "note": {
         "en": "Makemake is a dwarf planet about 45 au from the Sun, roughly 1,430 km across. These scans are four days apart, yet it moved less than a main-belt asteroid does in a few hours. The farther away a world is, the slower it seems to crawl, which is why a hidden planet would be so hard to catch.",
         "hi": "मेकमेक एक बौना ग्रह है, जो सूर्य से लगभग 45 au दूर है और लगभग 1,430 किमी चौड़ा है। ये दोनों स्कैन चार दिन के अंतर पर लिए गए, फिर भी यह उससे कम खिसका जितना मुख्य पट्टी का कोई क्षुद्रग्रह कुछ ही घंटों में खिसक जाता है। कोई पिंड जितना दूर होता है, उतना ही धीरे रेंगता दिखता है, इसीलिए किसी छिपे ग्रह को पकड़ना इतना मुश्किल है।"
+      }
+    },
+    {
+      "id": "auto-2026-10-01-125",
+      "kind": "real",
+      "folder": "auto-2026-10-01-125",
+      "title": {
+        "en": "Fresh from SPHEREx: 1 Oct 2026",
+        "hi": "SPHEREx से ताज़ा: 1 Oct 2026"
       }
     },
     {
@@ -50,14 +87,20 @@
         "en": "The ring and the rays here are leftovers from bright stars, not movers.",
         "hi": "यहाँ दिखने वाला छल्ला और किरणें चमकीले तारों के अवशेष हैं, चलती वस्तुएँ नहीं।"
       },
-      "title": { "en": "Where Planet Nine might hide", "hi": "जहाँ प्लैनेट नाइन छिपा हो सकता है" },
+      "title": {
+        "en": "Where Planet Nine might hide",
+        "hi": "जहाँ प्लैनेट नाइन छिपा हो सकता है"
+      },
       "note": {
         "en": "This patch lies on the path where astronomers Mike Brown and Konstantin Batygin predict Planet Nine is most likely to be. SPHEREx saw nothing moving here. A real Planet Nine would be about 550 au away, too faint for SPHEREx (around magnitude 22), and would shift less than one pixel between these two scans. Finding it will take deeper telescopes such as the Rubin Observatory.",
         "hi": "आकाश का यह हिस्सा उसी रास्ते पर है जहाँ खगोलशास्त्री माइक ब्राउन और कॉन्स्टैंटिन बैटीगिन के अनुसार प्लैनेट नाइन के होने की सबसे ज़्यादा संभावना है। SPHEREx को यहाँ कुछ भी चलता हुआ नहीं दिखा। असली प्लैनेट नाइन लगभग 550 au दूर होगा, SPHEREx के लिए बहुत धुंधला (लगभग मैग्निट्यूड 22), और इन दो स्कैन के बीच एक पिक्सेल से भी कम खिसकेगा। उसे ढूँढने के लिए रुबिन वेधशाला जैसे और गहराई तक देखने वाले टेलीस्कोप चाहिए।"
       },
       "noteLink": {
         "url": "https://arxiv.org/abs/2108.09868",
-        "label": { "en": "The prediction (Brown & Batygin 2021)", "hi": "भविष्यवाणी (ब्राउन और बैटीगिन 2021)" }
+        "label": {
+          "en": "The prediction (Brown & Batygin 2021)",
+          "hi": "भविष्यवाणी (ब्राउन और बैटीगिन 2021)"
+        }
       }
     }
   ]
