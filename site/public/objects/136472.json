@@ -1,0 +1,18 @@
+{
+  "number": 136472,
+  "name": "136472 Makemake",
+  "orbit_class": "TransNeptunian Object",
+  "diameter_km": 1430,
+  "diameter_source": "Ortiz et al. 2012, Nature 491, stellar occultation; not in SBDB",
+  "albedo": null,
+  "sun_distance_au": 45.6,
+  "perihelion_au": 38.3,
+  "aphelion_au": 52.8,
+  "period_years": 306.64,
+  "discovered": "2005-Mar-31",
+  "discovered_by": "Brown, M. E., Trujillo, C. A., Rabinowitz, D.",
+  "discovered_at": "Palomar",
+  "sbdb_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=136472",
+  "mpc_url": "https://minorplanetcenter.net/db_search/show_object?object_id=136472",
+  "source": "JPL Small-Body Database API"
+}
