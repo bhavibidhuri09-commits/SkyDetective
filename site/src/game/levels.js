@@ -20,8 +20,19 @@ async function loadPixels(url) {
   return ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
+const ROUND_LIST_ATTEMPTS = 4;
+const ROUND_LIST_WAIT_MS = 1500;
+
+// A brief network blip shouldn't lock the player out, so try a few times first.
 export async function loadRoundList() {
-  return (await fetchJson(`${BASE}levels/index.json`)).rounds;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return (await fetchJson(`${BASE}levels/index.json`)).rounds;
+    } catch (e) {
+      if (attempt === ROUND_LIST_ATTEMPTS) throw e;
+      await new Promise((done) => setTimeout(done, ROUND_LIST_WAIT_MS * attempt));
+    }
+  }
 }
 
 // The how-to animation: the training image without and with a planted mover.
