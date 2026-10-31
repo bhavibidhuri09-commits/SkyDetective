@@ -1,7 +1,7 @@
 import { useI18n } from "../i18n/I18n.jsx";
 import HowTo from "./HowTo.jsx";
 
-export default function Home({ onStart, onChallenge, onPractice, onExplore, ready }) {
+export default function Home({ onStart, onChallenge, onPractice, onExplore, ready, failed, onRetry }) {
   const { t } = useI18n();
   return (
     <section className="home">
@@ -18,7 +18,14 @@ export default function Home({ onStart, onChallenge, onPractice, onExplore, read
         <button className="btn" type="button" onClick={onChallenge} disabled={!ready}>{t("challenge")}</button>
         <button className="btn" type="button" onClick={onPractice}>{t("practice")}</button>
       </div>
-      <p className="hint">{t("challengeNote")}</p>
+      {failed ? (
+        <div className="controls" aria-live="polite">
+          <p className="hint form-error">{t("roundsFailed")}</p>
+          <button className="btn" type="button" onClick={onRetry}>{t("tryAgain")}</button>
+        </div>
+      ) : (
+        <p className="hint" aria-live="polite">{ready ? t("challengeNote") : t("roundsLoading")}</p>
+      )}
       <details className="guide">
         <summary>{t("guideTitle")}</summary>
         <dl>
