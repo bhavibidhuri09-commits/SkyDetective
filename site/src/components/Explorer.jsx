@@ -5,6 +5,7 @@ import {
   coversField, flagNames, fluxAt, glowAt, parseAngle, spreadInTime, stackAll, stackVisits, subtract, toImage,
 } from "../explore/frames.js";
 import { makeGrid } from "../explore/wcs.js";
+import { buildReport, mjdToUtc, saveReport } from "../explore/report.js";
 import SkyCanvas from "./SkyCanvas.jsx";
 import Chart from "./Chart.jsx";
 
@@ -24,6 +25,7 @@ const LOAD_AT_ONCE = 4;
 const SPECTRUM_FIELD = 0.05;
 const SPECTRUM_PER_DETECTOR = 10;
 const CATALOG_COLORS = { gaia: "#5fc8ff", wise: "#ff4f7b" };
+const OPINIONS = ["moving", "stationary", "artifact", "unsure"];
 
 // Boxes are centred near the 2025 position where a star's own motion matters. WISE 0855 uses the
 // coordinates in the challenge statement. motion = catalogue position, its year and mas/yr on the sky.
@@ -89,6 +91,8 @@ export default function Explorer({ initial, onHome }) {
   const [motion, setMotion] = useState(null);
   const [showExpected, setShowExpected] = useState(true);
   const [pin, setPin] = useState(null);
+  const [opinion, setOpinion] = useState("unsure");
+  const [note, setNote] = useState("");
   const [chart, setChart] = useState("spectrum");
   const [extraPoints, setExtraPoints] = useState(NONE);
   const [spectrumState, setSpectrumState] = useState("idle"); // idle | loading | done
@@ -305,6 +309,10 @@ export default function Explorer({ initial, onHome }) {
   const flagFrame = pin && shown?.flags ? shown : null;
   const pinFlags = flagFrame ? flagNames(flagFrame.flagsHeader, flagFrame.flags[pin.row * npix + pin.col]) : NONE;
   const allPoints = [...pointsHere, ...extraPoints];
+  const shownFrame = shown && !shown.stack && !shown.difference ? shown : null;
+  const saveCandidate = () => saveReport(buildReport({
+    grid, pin, frames, detector: frames[0].detector, opinion: t(`opinion_${opinion}`), note, pageUrl: window.location.href,
+  }));
   const label = (frame) => (frame.stack
     ? `${toDate(frame.mjdMid)} (${frame.count})`
     : `${toDate(frame.mjdMid)} · ${frame.wavelengthOf(grid.ra, grid.dec)?.toFixed(2)} µm`);
@@ -411,6 +419,27 @@ export default function Explorer({ initial, onHome }) {
 
           <p className="hint">{t(`hint_${mode === "video" ? source : mode}`)}</p>
 
+          <div className="provenance">
+            {shownFrame && (
+              <p>
+                {t("thisImage")}: <a href={shownFrame.url} target="_blank" rel="noreferrer">{shownFrame.obsId}</a>
+                {` · ${shownFrame.collection.replace("spherex_", "").toUpperCase()} · ${mjdToUtc(shownFrame.mjdMid).slice(0, 16).replace("T", " ")} UTC`}
+              </p>
+            )}
+            <details>
+              <summary>{t("imagesUsed", { n: frames.length })}</summary>
+              <ul>
+                {frames.map((f) => (
+                  <li key={f.obsId}>
+                    <a href={f.url} target="_blank" rel="noreferrer">{f.obsId}</a>
+                    {` · ${f.collection.replace("spherex_", "").toUpperCase()} · ${mjdToUtc(f.mjdMid).slice(0, 16).replace("T", " ")} UTC · ${f.wavelengthOf(grid.ra, grid.dec)?.toFixed(3)} µm`}
+                  </li>
+                ))}
+              </ul>
+              <p>{t("imagesNote")}</p>
+            </details>
+          </div>
+
           <div className="overlays">
             <span>{t("overlayLabel")}</span>
             {motion && (
@@ -452,6 +481,19 @@ export default function Explorer({ initial, onHome }) {
                 <button className="btn" type="button" onClick={loadFullSpectrum}>{t("fullSpectrum")}</button>
               )}
               {spectrumState === "loading" && <p>{t("fullSpectrumLoading", { n: spectrumProgress, total: wantedSpectrum })}</p>}
+              <div className="candidate">
+                <h4>{t("candidateTitle")}</h4>
+                <label>{t("opinionLabel")}
+                  <select value={opinion} onChange={(e) => setOpinion(e.target.value)}>
+                    {OPINIONS.map((o) => <option key={o} value={o}>{t(`opinion_${o}`)}</option>)}
+                  </select>
+                </label>
+                <label>{t("noteLabel")}
+                  <textarea rows="3" maxLength="1000" value={note} onChange={(e) => setNote(e.target.value)} placeholder={t("notePlaceholder")} />
+                </label>
+                <button className="btn" type="button" onClick={saveCandidate}>{t("saveReport")}</button>
+                <p>{t("candidateNote")}</p>
+              </div>
             </section>
           ) : <p className="hint">{t("pinHint")}</p>}
         </>
