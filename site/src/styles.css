@@ -62,6 +62,27 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--heat); outline-
 .howto-press { margin: 0; font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
 .howto-press.on { border-color: var(--ok); color: var(--ok); }
 
+.explore-call { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; }
+.explore-call p { margin: 0; font-size: 14px; }
+.explorer { display: flex; flex-direction: column; gap: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-btn { font-family: var(--body); font-size: 13px; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+.coords { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; align-items: end; }
+.coords label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--dim); }
+.coords input, .coords select { font-family: var(--mono); font-size: 16px; width: 100%; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 9px 10px; }
+.form-error { color: var(--ir); min-height: 0; }
+.segmented { display: flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.segmented button { flex: 1 1 0; font-family: var(--body); font-size: 13px; font-weight: 600; padding: 10px 6px; color: var(--dim); background: none; border: 0; cursor: pointer; }
+.segmented button + button { border-left: 1px solid var(--line); }
+.segmented button.on { color: #1a1205; background: var(--heat); }
+.scrub { flex: 1 1 100%; accent-color: var(--heat); }
+.overlays { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; font-size: 13px; color: var(--dim); }
+.overlays label { display: flex; gap: 6px; align-items: center; }
+.chart { width: 100%; height: auto; display: block; }
+.chart text { font-family: var(--mono); font-size: 10px; fill: var(--dim); }
+.chart-grid { stroke: var(--line); stroke-width: 1; }
+.chart-point { fill: var(--heat); }
+
 .status { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
 .status strong { color: var(--ink); font-weight: 500; }
 .round-title { font-family: var(--display); font-weight: 600; font-size: 20px; margin: 0; }
