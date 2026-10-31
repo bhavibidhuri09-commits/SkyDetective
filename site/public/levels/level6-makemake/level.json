@@ -1,0 +1,112 @@
+{
+  "id": "level6-makemake",
+  "center": {
+    "ra": 199.9256,
+    "dec": 21.476
+  },
+  "size_deg": 0.5,
+  "image_px": 585,
+  "arcsec_per_px": 3.077,
+  "orientation": "north up, east left",
+  "coords": "x,y in PNG pixels from top-left; u,v as fractions",
+  "dt_hours": 96.172,
+  "collection": "spherex_qr2",
+  "frames": [
+    {
+      "png": "frame_a.png",
+      "obs_id": "2025W23_2B_0620_1",
+      "detector": "SPHEREx-D1",
+      "mjd": 60834.388386,
+      "utc": "2025-06-08T09:19:16Z",
+      "wavelength_um": 0.9408,
+      "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W23_2B/l2b-v20-2025-252/1/level2_2025W23_2B_0620_1D1_spx_l2b-v20-2025-252.fits"
+    },
+    {
+      "png": "frame_b.png",
+      "obs_id": "2025W24_1A_0660_1",
+      "detector": "SPHEREx-D1",
+      "mjd": 60838.395549,
+      "utc": "2025-06-12T09:29:35Z",
+      "wavelength_um": 0.9333,
+      "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W24_1A/l2b-v20-2025-252/1/level2_2025W24_1A_0660_1D1_spx_l2b-v20-2025-252.fits"
+    }
+  ],
+  "flux_scale_b": 0.9924,
+  "diff_png": "diff.png",
+  "objects": [
+    {
+      "name": "Makemake",
+      "number": 136472,
+      "type": "KBO>Classical>Main",
+      "vmag": 17.11,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 275.48,
+          "y": 278.71,
+          "u": 0.4709,
+          "v": 0.4764,
+          "ra": 199.941235,
+          "dec": 21.487785,
+          "in_view": true,
+          "signal_sigma": 17.0,
+          "vanished": 0.98
+        },
+        {
+          "x": 309.61,
+          "y": 306.36,
+          "u": 0.5292,
+          "v": 0.5237,
+          "ra": 199.909886,
+          "dec": 21.464155,
+          "in_view": true,
+          "signal_sigma": 17.0,
+          "vanished": 0.97
+        }
+      ],
+      "motion_arcsec": 135.2,
+      "motion_px": 43.9,
+      "rate_arcsec_per_hour": 1.41,
+      "visible_guess": true
+    },
+    {
+      "name": "2014 GU98",
+      "number": null,
+      "type": "Hungaria",
+      "vmag": 21.98,
+      "source": "SkyBoT",
+      "frames": [
+        {
+          "x": 482.42,
+          "y": 40.66,
+          "u": 0.8246,
+          "v": 0.0695,
+          "ra": 199.75091,
+          "dec": 21.691156,
+          "in_view": true,
+          "signal_sigma": 2.0,
+          "vanished": 1.04
+        },
+        {
+          "x": 42.64,
+          "y": 441.12,
+          "u": 0.0729,
+          "v": 0.754,
+          "ra": 200.154885,
+          "dec": 21.34882,
+          "in_view": true,
+          "signal_sigma": 2.5,
+          "vanished": 1.32
+        }
+      ],
+      "motion_arcsec": 1830.1,
+      "motion_px": 594.8,
+      "rate_arcsec_per_hour": 19.03,
+      "visible_guess": false
+    }
+  ],
+  "movers": [
+    "Makemake"
+  ],
+  "credit": "SPHEREx data: NASA/JPL-Caltech, via NASA/IPAC Infrared Science Archive (IRSA). Solar-system positions: IMCCE SkyBoT; JPL Horizons."
+}
