@@ -1,4 +1,4 @@
-import { plantMover, randomPlant } from "./plantMover.js";
+import { plantDecoy, plantMover, randomPlant } from "./plantMover.js";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -80,6 +80,13 @@ export async function loadRound(round) {
     loadPixels(`${dir}frame_a.png`),
     loadPixels(`${dir}frame_b.png`),
   ]);
+
+  if (round.trick) {
+    const decoy = plantDecoy(frameA, frameB, round.trick);
+    // round.trick.spots: things already in the real images that look like movers but aren't.
+    const decoys = round.trick.spots ?? (decoy ? [decoy] : []);
+    return { round, level, frames: [frameA, frameB], targets: [], decoys };
+  }
 
   if (round.kind === "training") {
     const spot = plantMover(frameA, frameB, round.plant);

@@ -70,6 +70,42 @@ export function plantMover(frameA, frameB, { seed, peak, sigma, jump }) {
   throw new Error("No clear spot for the planted mover");
 }
 
+// A short, sharp line, the shape a cosmic ray leaves on a detector.
+function stampStreak(img, x, y, peak, length, angle) {
+  const steps = Math.ceil(length * 2);
+  for (let n = 0; n <= steps; n++) {
+    const along = (n / steps - 0.5) * length;
+    const px = Math.floor(x + Math.cos(angle) * along);
+    const py = Math.floor(y + Math.sin(angle) * along);
+    const k = (py * img.width + px) * 4;
+    for (let c = 0; c < 3; c++) img.data[k + c] = Math.max(img.data[k + c], peak);
+  }
+}
+
+// Training tricks: something that changes between the scans without moving.
+// Returns the decoy's position, the same in both frames. "clean" adds nothing.
+export function plantDecoy(frameA, frameB, { type, seed }) {
+  if (type === "clean") return null;
+  const random = seededRandom(seed);
+  const margin = 40;
+  const clearA = medianLevel(frameA) + 60;
+  const clearB = medianLevel(frameB) + 60;
+  const { width, height } = frameA;
+  for (let tries = 0; tries < 1000; tries++) {
+    const x = margin + random() * (width - 2 * margin);
+    const y = margin + random() * (height - 2 * margin);
+    if (brightestNear(frameA, x, y, 10) > clearA || brightestNear(frameB, x, y, 10) > clearB) continue;
+    if (type === "brightness") {
+      stamp(frameA, x, y, 200, 2.6);
+      stamp(frameB, x, y, 60, 2.6);
+    } else {
+      stampStreak(frameB, x, y, 255, 11, random() * Math.PI);
+    }
+    return { x, y };
+  }
+  throw new Error("No clear spot for the decoy");
+}
+
 export function randomPlant() {
   return {
     seed: 1 + Math.floor(Math.random() * 2e9),
