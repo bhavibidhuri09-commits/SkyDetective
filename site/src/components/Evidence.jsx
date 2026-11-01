@@ -4,14 +4,15 @@ const when = (utc) => `${utc.slice(0, 10)} ${utc.slice(11, 16)} UTC`;
 const release = (collection) => collection.replace("spherex_", "").toUpperCase();
 
 // The record behind an answer: which images, what changed, why this is the verdict, and where it came from.
-export default function Evidence({ level, simulated, target }) {
+export default function Evidence({ level, simulated, target, trick }) {
   const { t } = useI18n();
   const [a, b] = level.frames;
   const hours = level.dt_hours.toFixed(1);
   const faint = level.objects.filter((o) => !level.movers.includes(o.name));
 
   let verdict = "verdictNone";
-  if (simulated) verdict = "verdictPlanted";
+  if (trick) verdict = `verdict_${trick}`;
+  else if (simulated) verdict = "verdictPlanted";
   else if (target) verdict = "verdictConfirmed";
 
   let shift = null;
@@ -64,10 +65,10 @@ export default function Evidence({ level, simulated, target }) {
         )}
         <div>
           <dt>{t("evidenceSource")}</dt>
-          <dd>{t(simulated ? "evidenceSourceSim" : "evidenceSourceReal", { release: release(level.collection) })}</dd>
+          <dd>{t(trick ? `evidenceSource_${trick}` : simulated ? "evidenceSourceSim" : "evidenceSourceReal", { release: release(level.collection) })}</dd>
         </div>
       </dl>
-      <p className="evidence-limit">{t(simulated ? "evidenceLimitSim" : "evidenceLimitReal")}</p>
+      <p className="evidence-limit">{t(trick ? "evidenceLimitTrick" : simulated ? "evidenceLimitSim" : "evidenceLimitReal")}</p>
     </section>
   );
 }

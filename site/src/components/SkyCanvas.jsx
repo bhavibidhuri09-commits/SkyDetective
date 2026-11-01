@@ -3,7 +3,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 const GREEN = "#5fe3a1";
 const RED = "#ff4f7b";
 const MAX_ZOOM = 3;
+const AMBER = "#ffc857";
 const DRAG_PX = 4; // a mouse move this far is a pan, not a tap
+const NO_DECOYS = [];
 
 function ring(ctx, p, color, radius = 14) {
   ctx.strokeStyle = color;
@@ -16,7 +18,7 @@ function ring(ctx, p, color, radius = 14) {
 // Shows one frame at a time (the blink) plus answer overlays, and reports
 // taps in image pixels so they can be compared with level.json positions.
 // When zoomed the canvas scrolls inside its box: touch scrolls natively, a mouse drags.
-export default function SkyCanvas({ frames, diff, showB, found, reveal, flash, overlay, onTap, stampText, cornerText, label, zoomInLabel, zoomOutLabel }) {
+export default function SkyCanvas({ frames, diff, showB, found, reveal, decoys = NO_DECOYS, flash, overlay, onTap, stampText, cornerText, label, zoomInLabel, zoomOutLabel }) {
   const ref = useRef(null);
   const scroller = useRef(null);
   const center = useRef(null);
@@ -66,9 +68,10 @@ export default function SkyCanvas({ frames, diff, showB, found, reveal, flash, o
       if (diff) t.frames.forEach((f) => ring(ctx, f, GREEN));
       else ring(ctx, t.frames[frameIndex], GREEN);
     }
+    for (const spot of decoys) ring(ctx, spot, AMBER);
     if (flash) ring(ctx, flash, RED);
     if (overlay) overlay(ctx);
-  }, [frames, diff, frameIndex, found, reveal, flash, overlay]);
+  }, [frames, diff, frameIndex, found, reveal, decoys, flash, overlay]);
 
   const handlePointerDown = (e) => {
     if (e.pointerType !== "mouse" || zoom === 1) {

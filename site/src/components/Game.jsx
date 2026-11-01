@@ -3,7 +3,7 @@ import { useI18n } from "../i18n/I18n.jsx";
 import { loadDiff, loadRound } from "../game/levels.js";
 import { randomPlant } from "../game/plantMover.js";
 import {
-  FIND_POINTS, MISS_POINTS, NOTHING_MOVED_POINTS, correctPoints, emptyStats, targetAt,
+  FIND_POINTS, MISS_POINTS, NOTHING_MOVED_POINTS, TAP_RADIUS_PX, correctPoints, emptyStats, targetAt,
 } from "../game/scoring.js";
 import SkyCanvas from "./SkyCanvas.jsx";
 import ResultCard, { formatDate } from "./ResultCard.jsx";
@@ -93,7 +93,8 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
     if (!hit) {
       setStats((s) => ({ ...s, answers: s.answers + 1, streak: 0, score: Math.max(0, s.score + MISS_POINTS) }));
       setFlash({ x, y });
-      setHint("miss");
+      const onDecoy = data.decoys?.some((spot) => Math.hypot(spot.x - x, spot.y - y) <= TAP_RADIUS_PX);
+      setHint(onDecoy ? `miss_${data.round.trick.type}` : "miss");
       setTimeout(() => setFlash(null), 900);
       return;
     }
@@ -172,9 +173,11 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
       <h2 className="round-title">{round.title[lang]}</h2>
       {/* Team decision: players see whether a round is real or simulated before they answer. */}
       <span className={`badge ${data.round.kind === "training" ? "sim" : "real"}`}>
-        {data.round.kind === "training"
-          ? t("badgeSim")
-          : t("badgeReal", { date: formatDate(data.level.frames[0].utc, lang) })}
+        {data.round.trick
+          ? t("badgeTrick")
+          : data.round.kind === "training"
+            ? t("badgeSim")
+            : t("badgeReal", { date: formatDate(data.level.frames[0].utc, lang) })}
       </span>
 
       <SkyCanvas
@@ -186,6 +189,7 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
         showB={showB}
         found={done ? [] : found}
         reveal={reveal}
+        decoys={done ? data.decoys : undefined}
         flash={flash}
         onTap={handleTap}
         label={round.title[lang]}

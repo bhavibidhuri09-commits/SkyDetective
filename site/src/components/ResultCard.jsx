@@ -46,15 +46,18 @@ export default function ResultCard({ result, data }) {
     title = simulated ? t("foundSim") : t("foundName", { name });
   }
 
+  const trick = data.round.trick?.type;
+
   let body = null;
-  if (simulated) body = t("simTxt");
+  if (trick) body = t(`trick_${trick}`);
+  else if (simulated) body = t("simTxt");
   else if (result.kind === "noneRight") body = t("noneRightTxt");
   else if (result.kind === "noneWrong") body = t("noneWrongTxt");
 
   return (
     <section className={`result ${good ? "" : "miss"}`} aria-live="polite">
       <span className={`badge ${simulated ? "sim" : "real"}`}>
-        {simulated ? t("badgeSim") : t("badgeReal", { date: formatDate(data.level.frames[0].utc, lang) })}
+        {trick ? t("badgeTrick") : simulated ? t("badgeSim") : t("badgeReal", { date: formatDate(data.level.frames[0].utc, lang) })}
       </span>
       <h3>{title}</h3>
       {result.points > 0 && (
@@ -73,7 +76,7 @@ export default function ResultCard({ result, data }) {
           )}
         </p>
       )}
-      <Evidence level={data.level} simulated={simulated} target={target} />
+      <Evidence level={data.level} simulated={simulated} target={target} trick={trick} />
       {target && !simulated && <ObjectFacts target={target} />}
     </section>
   );
