@@ -23,5 +23,5 @@ export function correctPoints(base, seconds, streak, withSpeedBonus = true) {
 }
 
 export const emptyStats = () => ({
-  score: 0, correct: 0, answers: 0, moversFound: 0, skyDeg2: 0, streak: 0, realRounds: 0, simRounds: 0,
+  score: 0, correct: 0, answers: 0, moversFound: 0, skyDeg2: 0, streak: 0, realRounds: 0, simRounds: 0, log: [],
 });
