@@ -11,3 +11,16 @@ createRoot(document.getElementById("root")).render(
     </I18nProvider>
   </React.StrictMode>
 );
+
+// Saves the case file for playing without internet, after the page has finished loading.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      await navigator.serviceWorker.register("/sw.js");
+      const { active } = await navigator.serviceWorker.ready;
+      if (!navigator.connection?.saveData) active.postMessage("save-case-file");
+    } catch {
+      // No offline copy on this device; the game still works online.
+    }
+  });
+}
