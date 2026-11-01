@@ -31,6 +31,50 @@
       }
     },
     {
+      "id": "training-3",
+      "kind": "training",
+      "folder": "training-bg",
+      "trick": {
+        "type": "brightness",
+        "seed": 70000
+      },
+      "title": {
+        "en": "Training: moving, or not?",
+        "hi": "ट्रेनिंग: चल रहा है या नहीं?"
+      }
+    },
+    {
+      "id": "training-4",
+      "kind": "training",
+      "folder": "training-bg",
+      "trick": {
+        "type": "glitch",
+        "seed": 40000
+      },
+      "title": {
+        "en": "Training: look twice",
+        "hi": "ट्रेनिंग: दोबारा देखिए"
+      }
+    },
+    {
+      "id": "training-5",
+      "kind": "training",
+      "folder": "training-bg",
+      "trick": {
+        "type": "clean",
+        "spots": [
+          { "x": 453.5, "y": 313.8 },
+          { "x": 351, "y": 169 },
+          { "x": 157.5, "y": 214.5 },
+          { "x": 317, "y": 233 }
+        ]
+      },
+      "title": {
+        "en": "Training: don't be fooled",
+        "hi": "ट्रेनिंग: धोखा मत खाइए"
+      }
+    },
+    {
       "id": "level2-hygiea",
       "kind": "real",
       "folder": "level2-hygiea",
