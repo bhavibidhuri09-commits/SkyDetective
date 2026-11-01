@@ -41,6 +41,7 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
   const [diffFailed, setDiffFailed] = useState(false);
   const [stats, setStats] = useState(emptyStats);
   const startedAt = useRef(Date.now());
+  const wrongTaps = useRef({ all: 0, decoy: 0 });
   const currentRound = useRef(round);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
         setShowB(false);
         setPlaying(true);
         startedAt.current = Date.now();
+        wrongTaps.current = { all: 0, decoy: 0 };
       })
       .catch(() => live && setLoadError(true));
     return () => { live = false; };
@@ -78,8 +80,10 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
 
   const seconds = () => (Date.now() - startedAt.current) / 1000;
 
-  function finishRound() {
+  function finishRound(right) {
     setDone(true);
+    const entry = { id: data.round.id, right, wrongTaps: wrongTaps.current.all, decoyTaps: wrongTaps.current.decoy, seconds: Math.round(seconds()) };
+    setStats((s) => ({ ...s, log: [...s.log, entry] }));
     if (data.round.kind === "real") {
       setStats((s) => ({ ...s, realRounds: s.realRounds + 1, skyDeg2: s.skyDeg2 + data.level.size_deg ** 2 }));
     } else {
@@ -95,6 +99,8 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
       setFlash({ x, y });
       const onDecoy = data.decoys?.some((spot) => Math.hypot(spot.x - x, spot.y - y) <= TAP_RADIUS_PX);
       setHint(onDecoy ? `miss_${data.round.trick.type}` : "miss");
+      wrongTaps.current.all += 1;
+      if (onDecoy) wrongTaps.current.decoy += 1;
       setTimeout(() => setFlash(null), 900);
       return;
     }
@@ -104,7 +110,7 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
     setStats((s) => ({ ...s, answers: s.answers + 1, correct: s.correct + 1, moversFound: s.moversFound + 1,
                        streak: s.streak + 1, score: s.score + award.points }));
     setResult({ kind: "found", target: hit, ...award });
-    if (nowFound.length === data.targets.length) finishRound();
+    if (nowFound.length === data.targets.length) finishRound(true);
     else setHint("hintMore");
   }
 
@@ -120,7 +126,7 @@ export default function Game({ mode, rounds, onEnd, onHome }) {
       setStats((s) => ({ ...s, answers: s.answers + 1, streak: 0 }));
       setResult({ kind: "noneWrong", target: missed[0], points: 0 });
     }
-    finishRound();
+    finishRound(data.targets.length === 0);
   }
 
   function toggleDiff() {
