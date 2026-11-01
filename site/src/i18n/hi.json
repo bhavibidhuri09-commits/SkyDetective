@@ -191,6 +191,10 @@
   "skySearched": "जाँचा गया असली आकाश",
   "skyValue": "{n} वर्ग डिग्री",
   "skyTxt": "आप जो भी खाली हिस्सा जाँचते हैं, वह बताता है कि प्लैनेट X कहाँ नहीं छिपा। SPHEREx हर छह महीने में पूरे आकाश (लगभग 41,000 वर्ग डिग्री) का नक्शा बनाता है।",
+  "testReportTxt": "टेस्ट करने के लिए धन्यवाद! कृपया यह नतीजा वापस भेजिए। इसमें सिर्फ़ आपके जवाब और समय हैं, और आपके भेजे बिना कुछ नहीं जाता।",
+  "testWhatsApp": "WhatsApp पर भेजें",
+  "testCopy": "नतीजा कॉपी करें",
+  "testCopied": "कॉपी हो गया",
   "again": "फिर से खेलें",
   "credit": "SPHEREx तस्वीरें: NASA/JPL-Caltech, NASA/IPAC IRSA के माध्यम से। क्षुद्रग्रहों की स्थिति: IMCCE SkyBoT और JPL Horizons। जानकारी: JPL Small-Body Database।",
   "orbitClass": {

@@ -191,6 +191,10 @@
   "skySearched": "Real sky searched",
   "skyValue": "{n} sq. degrees",
   "skyTxt": "Every empty patch you check narrows where a Planet X could hide. SPHEREx maps the whole sky, about 41,000 square degrees, every six months.",
+  "testReportTxt": "Thanks for testing! Please send this result back. It has your answers and times only, and nothing is sent unless you send it.",
+  "testWhatsApp": "Send on WhatsApp",
+  "testCopy": "Copy result",
+  "testCopied": "Copied",
   "again": "Play again",
   "credit": "SPHEREx images: NASA/JPL-Caltech via NASA/IPAC IRSA. Asteroid positions: IMCCE SkyBoT and JPL Horizons. Facts: JPL Small-Body Database.",
   "orbitClass": {
